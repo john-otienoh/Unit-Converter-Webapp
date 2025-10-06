@@ -1,0 +1,53 @@
+{{define "title"}}Weight Converter{{end}}
+{{template "base.html" .}}
+
+{{define "content"}}
+<div class="card shadow p-4">
+    <h3 class="mb-4 text-primary">Weight Converter</h3>
+
+    <form method="POST" action="/weight" class="row g-3">
+        <div class="col-md-4">
+            <label class="form-label">Value</label>
+            <input type="text" name="value" class="form-control" placeholder="Enter value" required>
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label">From</label>
+            <select name="from" class="form-select">
+                <option>mg</option>
+                <option>g</option>
+                <option selected>kg</option>
+                <option>oz</option>
+                <option>lb</option>
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label">To</label>
+            <select name="to" class="form-select">
+                <option>mg</option>
+                <option>g</option>
+                <option selected>kg</option>
+                <option>oz</option>
+                <option>lb</option>
+            </select>
+        </div>
+
+        <div class="col-md-2 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary w-100">Convert</button>
+        </div>
+    </form>
+
+    <hr class="my-4">
+
+    {{if .ErrorMsg}}
+        <div class="alert alert-danger">{{.ErrorMsg}}</div>
+    {{end}}
+
+    {{if .Submitted}}
+        <div class="alert alert-success fw-bold">
+            {{.Value}} {{.FromUnit}} = {{printf "%.1f" .Result}} {{.ToUnit}}
+        </div>
+    {{end}}
+</div>
+{{end}}
